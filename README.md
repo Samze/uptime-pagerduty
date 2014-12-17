@@ -1,7 +1,7 @@
 uptime-pagerduty
 ======
 
-A plugin that allows uptime notifications to be sent to www.pagerduty.com
+A plugin for uptime that allows notifications to be sent to www.pagerduty.com
 
 Uptime can be found here
 https://github.com/fzaninotto/uptime
