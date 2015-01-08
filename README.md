@@ -11,7 +11,12 @@ Use
 
 
 Install the plugin by adding
-` plugins/pagerduty/index.js`
+` plugins/pagerduty/index.js` file to uptime.
+
+This plugin requires the https://www.npmjs.com/package/pagerduty node module.
+```sh
+npm install pagerduty --save
+```
 
 Add the following configuration to your uptime's default.yaml.
 ```yaml
