@@ -58,3 +58,4 @@ webPageTest:
 
 pagerduty:
 	serviceKey:	123
+  autoresolve:  false

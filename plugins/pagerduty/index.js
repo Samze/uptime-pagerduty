@@ -12,23 +12,24 @@ exports.initWebApp = function(options) {
 		activeAlerts.push(incident);
 	}
 
-	var incidentExists = function(id){
-		return getIncident(id) === undefined ? false : true;
-	}
+	var getIncident = function(newId){
+		var foundIncident;
 
-	var getIncident = function(id){
-		activeAlerts.foreach(function(incident){
-			if(incident.id === id) {
-				return true;
+		activeAlerts.forEach(function(incident){
+			if(JSON.stringify(incident._id) === JSON.stringify(newId.toString())) {
+				foundIncident = incident;
 			}
 		});
-		return false;
+
+		return foundIncident;
+	}
+
+	var incidentExists = function(newId){
+		return getIncident(newId) === undefined ? false : true;
 	}
 
  	CheckEvent.on('afterInsert', function(checkEvent) {
 	    checkEvent.findCheck(function(findErr, check) {
-	    	console.log(check);
-	    	console.log(checkEvent);
 	      	if(!check.isUp){
 			    pager.create({
 					incidentKey: checkEvent._id,
@@ -39,17 +40,14 @@ exports.initWebApp = function(options) {
 							console.log(err);
 						} else {
 							console.log(response);
-							addAlert({ id : check._id, incident_key : response.incident_key});
+							addAlert({ _id : check._id, incident_key : response.incident_key});
 						}
 					}
 				});
-			} else if(check.isUp){
-				if(incidentExists(check.id)){
-					var incident = getIncident(id);
+			} else if(check.isUp && config.autoresolve){
+				if(incidentExists(check._id)){
+					var incident = getIncident(check._id);
 					var incident_key = incident.incident_key;
-
-					console.log(incident_key);
-
 					pager.resolve({
 						incidentKey : incident_key,
 						description: 'Uptime up: ' + check.name,
