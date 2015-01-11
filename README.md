@@ -7,12 +7,12 @@ Uptime can be found here
 https://github.com/fzaninotto/uptime
 
 Features
---------
+-------
 - Automatic raising of alerts
 - Automatic resolving of alerts (optional)
 
-Use
---------
+Installation
+-------
 
 Install the plugin by adding
 ` plugins/pagerduty/index.js` file to uptime.
