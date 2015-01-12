@@ -57,5 +57,5 @@ webPageTest:
   testOptions: 
 
 pagerduty:
-	serviceKey:	123
+  serviceKey:	123
   autoresolve:  false
